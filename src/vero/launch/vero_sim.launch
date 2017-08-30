@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 
 <launch>
+
+  <arg name="world_file" default="$(find vero)/worlds/holed_corridor.world"/>
+  <arg name="use_joy" default="false" />
   
   <include file="$(find dbw_mkz_gazebo)/launch/dbw_mkz_gazebo.launch" >
     <arg name="use_camera_control" value="false" />
@@ -8,20 +11,26 @@
     <arg name="sim_param_file" value="$(find vero)/yaml/vero.yaml" />
     <arg name="urdf_file" value="$(find vero)/urdf/vero.urdf.xacro" />
   </include>
+
+  <!-- Joystick demo -->
+  <group if="$(arg use_joy)">
+    <arg name="enable" default="false"/>
+    <node ns="mkz" pkg="dbw_mkz_joystick_demo" type="joystick_demo" name="joystick_demo" output="screen" >
+      <param name="enable" value="$(arg enable)" />
+    </node>
+
+    <!-- Joystick driver -->
+    <node pkg="joy" type="joy_node" name="joy_node" output="screen" >
+      <param name="deadzone" value="0.01" />
+    </node>
+  </group>
   
- <!--  <include file="$(find dbw_mkz_can)/launch/dbw.launch" >
-    <arg name="live" value="false" />
-    <arg name="load_urdf" value="false" />
-    <arg name="can_ns" value="can_bus_dbw" />
-    <arg name="vehicle_ns" value="fusion" />
-  </include>
-  <node ns="fusion" pkg="rostopic" type="rostopic" name="twist_pub" args="pub cmd_vel geometry_msgs/Twist '{linear: {x: 5.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.5}}' -r 50" />
-   -->
+
   <include file="$(find dbw_mkz_can)/launch/dbw.launch" >
     <arg name="live" value="false" />
     <arg name="load_urdf" value="false" />
     <arg name="can_ns" value="can_bus_dbw" />
     <arg name="vehicle_ns" value="mkz" />
   </include>
- <!--  <node ns="mkz" pkg="rostopic" type="rostopic" name="twist_pub" args="pub cmd_vel geometry_msgs/Twist '{linear: {x: 5.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: -0.5}}' -r 50" /> -->
+
 </launch>
