@@ -24,7 +24,6 @@
       <param name="deadzone" value="0.01" />
     </node>
   </group>
-  
 
   <include file="$(find dbw_mkz_can)/launch/dbw.launch" >
     <arg name="live" value="false" />
