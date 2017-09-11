@@ -1,0 +1,7 @@
+<launch>
+	<include file="$(find vero)/launch/vero_sim.launch"/>
+
+	<include file="$(find ransac_project)/launch/nodeRansac.launch"/>
+
+	<include file="$(find vero)/launch/rviz.launch"/>
+</launch>
