@@ -32,3 +32,8 @@ The four CAN bus channels have several parameters:
         * Otherwise, follow the directions in [90-DataspeedUsbCanToolRules.rules](dataspeed_can_usb/udev/90-DataspeedUsbCanToolRules.rules) to perform a manual install.
 * Why is the power LED blinking green?
     * The power LED blinks green every two seconds under normal operation.
+
+# Migration
+
+In September 2017, the ROS message type was migrated to [can_msgs/Frame](http://docs.ros.org/api/can_msgs/html/msg/Frame.html). See [can_msgs_migration](can_msgs_migration.md) for more details.
+

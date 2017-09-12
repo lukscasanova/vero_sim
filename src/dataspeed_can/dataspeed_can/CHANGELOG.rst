@@ -2,6 +2,11 @@
 Changelog for package dataspeed_can
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.0.6 (2017-09-07)
+------------------
+* Migrated from dataspeed_can_msgs to can_msgs (this will break dependent packages)
+* Contributors: Kevin Hallenbeck
+
 1.0.5 (2017-08-21)
 ------------------
 

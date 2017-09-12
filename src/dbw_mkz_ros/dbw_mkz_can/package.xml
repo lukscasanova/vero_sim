@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package format="2">
   <name>dbw_mkz_can</name>
-  <version>1.0.7</version>
+  <version>1.0.8</version>
   <description>
     Drive-by-wire interface to the Dataspeed Inc. Lincoln MKZ DBW kit
   </description>
@@ -21,7 +21,7 @@
   <depend>std_msgs</depend>
   <depend>geometry_msgs</depend>
   <depend>sensor_msgs</depend>
-  <depend>dataspeed_can_msgs</depend>
+  <depend>can_msgs</depend>
   <depend>dbw_mkz_msgs</depend>
 
   <build_depend>dataspeed_can_msg_filters</build_depend>

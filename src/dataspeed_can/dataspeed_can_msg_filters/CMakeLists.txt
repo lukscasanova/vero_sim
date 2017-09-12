@@ -3,12 +3,12 @@ project(dataspeed_can_msg_filters)
 
 find_package(catkin REQUIRED COMPONENTS
   roscpp
-  dataspeed_can_msgs
+  can_msgs
 )
 
 catkin_package(
   INCLUDE_DIRS include
-  CATKIN_DEPENDS roscpp dataspeed_can_msgs
+  CATKIN_DEPENDS roscpp can_msgs
 )
 
 install(DIRECTORY include/${PROJECT_NAME}/

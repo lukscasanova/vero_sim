@@ -50,7 +50,7 @@
 #include <std_msgs/Int64.h>
 #include <std_msgs/Float64.h>
 
-#include <dataspeed_can_msgs/CanMessageStamped.h>
+#include <can_msgs/Frame.h>
 #include "DbcIterator.hpp"
 
 namespace dataspeed_can_tools
@@ -84,8 +84,8 @@ public:
   void initPublishers(RosCanMsgStruct& can_msg, ros::NodeHandle& nh);
   void openBag(std::string fname);
   void closeBag();
-  void pubMessage(const dataspeed_can_msgs::CanMessageStamped& msg);
-  void pubMessage(const dataspeed_can_msgs::CanMessageStamped::ConstPtr& msg) { pubMessage(*msg); }
+  void pubMessage(const can_msgs::Frame& msg);
+  void pubMessage(const can_msgs::Frame::ConstPtr& msg) { pubMessage(*msg); }
 
 private:
 

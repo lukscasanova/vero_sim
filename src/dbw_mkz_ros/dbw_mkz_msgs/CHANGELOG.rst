@@ -2,6 +2,9 @@
 Changelog for package dbw_mkz_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.0.8 (2017-09-07)
+------------------
+
 1.0.7 (2017-08-21)
 ------------------
 * Removed steering report driver activity bit

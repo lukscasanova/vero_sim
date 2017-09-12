@@ -38,7 +38,7 @@
 #include <ros/ros.h>
 
 // ROS messages
-#include <dataspeed_can_msgs/CanMessageStamped.h>
+#include <can_msgs/Frame.h>
 
 // Mutex
 #include <boost/thread/mutex.hpp>
@@ -63,7 +63,7 @@ public:
 private:
   void timerServiceCallback(const ros::WallTimerEvent& event);
   void timerFlushCallback(const ros::WallTimerEvent& event);
-  void recvRos(const dataspeed_can_msgs::CanMessage::ConstPtr& msg, unsigned int channel);
+  void recvRos(const can_msgs::Frame::ConstPtr& msg, unsigned int channel);
 
   void recvDevice(unsigned int channel, uint32_t id, bool extended, uint8_t dlc, const uint8_t data[8]);
   void serviceDevice();
@@ -99,6 +99,9 @@ private:
 
   // Name prefix for print statements
   std::string name_;
+
+  // Number of total drops for status warnings
+  uint32_t total_drops_;
 };
 
 } // namespace dataspeed_can_usb

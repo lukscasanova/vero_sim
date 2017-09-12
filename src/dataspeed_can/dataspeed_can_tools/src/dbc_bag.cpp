@@ -37,7 +37,7 @@
 #include <rosbag/bag.h>
 #include <rosbag/view.h>
 #include <boost/foreach.hpp>
-#include <dataspeed_can_msgs/CanMessageStamped.h>
+#include <can_msgs/Frame.h>
 
 #include "CanExtractor.h"
 
@@ -74,7 +74,7 @@ int main(int argc, char** argv)
   int last_percent = 0;
 
   BOOST_FOREACH(rosbag::MessageInstance const m, view) {
-    dataspeed_can_msgs::CanMessageStamped::ConstPtr msg = m.instantiate<dataspeed_can_msgs::CanMessageStamped>();
+    can_msgs::Frame::ConstPtr msg = m.instantiate<can_msgs::Frame>();
 
     double current_time = (msg->header.stamp - view.getBeginTime()).toSec();
     if ((int)(100 * current_time / total_time) >= last_percent) {
@@ -83,7 +83,7 @@ int main(int argc, char** argv)
     }
 
     dataspeed_can_tools::RosCanMsgStruct can_msg;
-    can_msg.id = msg->msg.id;
+    can_msg.id = msg->id;
     extractor.getMessage(can_msg);
     extractor.pubMessage(msg);
   }

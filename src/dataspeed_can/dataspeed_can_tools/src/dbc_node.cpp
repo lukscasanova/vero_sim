@@ -35,15 +35,15 @@
 #include <ros/ros.h>
 #include <ros/package.h>
 #include "CanExtractor.h"
-#include <dataspeed_can_msgs/CanMessageStamped.h>
+#include <can_msgs/Frame.h>
 
 ros::NodeHandle *nh_;
 dataspeed_can_tools::CanExtractor* extractor_;
 
-void recvCanMessage(const dataspeed_can_msgs::CanMessageStamped::ConstPtr& msg)
+void recv(const can_msgs::Frame::ConstPtr& msg)
 {
   dataspeed_can_tools::RosCanMsgStruct info;
-  info.id = msg->msg.id;
+  info.id = msg->id;
 
   if (extractor_->getMessage(info)) {
     extractor_->initPublishers(info, *nh_);
@@ -67,7 +67,7 @@ int main(int argc, char** argv)
   dataspeed_can_tools::CanExtractor extractor(dbc_file);
   extractor_ = &extractor;
 
-  ros::Subscriber sub_can = nh.subscribe("can_rx", 100, recvCanMessage);
+  ros::Subscriber sub_can = nh.subscribe("can_rx", 100, recv);
 
   ros::spin();
 }

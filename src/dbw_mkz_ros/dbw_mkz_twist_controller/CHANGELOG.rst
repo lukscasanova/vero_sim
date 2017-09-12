@@ -2,6 +2,9 @@
 Changelog for package dbw_mkz_twist_controller
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.0.8 (2017-09-07)
+------------------
+
 1.0.7 (2017-08-21)
 ------------------
 * Updated ackermann steering parameters (including steering ratio)

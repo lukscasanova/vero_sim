@@ -1,21 +1,13 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(dataspeed_can_msgs)
 
-find_package(catkin REQUIRED COMPONENTS
-  message_generation
-  std_msgs
-)
+find_package(catkin REQUIRED COMPONENTS)
 
-add_message_files(DIRECTORY msg FILES
-  CanMessage.msg
-  CanMessageStamped.msg
-)
+catkin_package(INCLUDE_DIRS include)
 
-generate_messages(DEPENDENCIES
-  std_msgs
+install(DIRECTORY include/${PROJECT_NAME}/
+        DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 )
-
-catkin_package(CATKIN_DEPENDS
-  message_runtime
-  std_msgs
+install(DIRECTORY bmr
+        DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )

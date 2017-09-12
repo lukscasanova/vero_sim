@@ -37,14 +37,14 @@
 
 #include <deque>
 #include <ros/ros.h>
-#include <dataspeed_can_msgs/CanMessageStamped.h>
+#include <can_msgs/Frame.h>
 
 namespace dataspeed_can_msg_filters
 {
 class ApproximateTime
 {
 public:
-  typedef dataspeed_can_msgs::CanMessageStamped::ConstPtr Type;
+  typedef can_msgs::Frame::ConstPtr Type;
   typedef boost::function<void(const std::vector<Type> &vec)> Callback;
 
   ApproximateTime(uint32_t queue_size, Callback callback, uint32_t id1, uint32_t id2)
@@ -255,10 +255,11 @@ public:
 
   void processMsg(const Type &msg)
   {
+    if (msg->is_rtr || msg->is_error) return;
     for (unsigned int i = 0; i < vector_.size(); i++) {
-      if (msg->msg.id == vector_[i].id) {
+      if (msg->id == vector_[i].id) {
 #if 0
-        ROS_INFO("Id 0x%X: %u.%u", msg->msg.id, msg->header.stamp.sec, msg->header.stamp.nsec);
+        ROS_INFO("Id 0x%X: %u.%u", msg->id, msg->header.stamp.sec, msg->header.stamp.nsec);
 #endif
         std::deque<Type>& deque = vector_[i].deque;
         deque.push_back(msg);

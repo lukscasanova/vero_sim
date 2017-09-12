@@ -49,6 +49,7 @@ data/dataspeed_can_usb/package.xml.i
 data/dataspeed_can_msg_filters/include/dataspeed_can_msg_filters/ApproximateTime.h.i
 data/dataspeed_can_tools/nodelets.xml.i
 data/dataspeed_can_msg_filters/README.md.i
+data/dataspeed_can_usb/udev/90-DataspeedUsbCanToolRules.rules.i
 data/dataspeed_can_usb/firmware/UsbCan_EPAS_v10.2.0.hex.i
 data/dataspeed_can_usb/src/ConciseTypes.h.i
 data/dataspeed_can_tools/src/Signal.cpp.i

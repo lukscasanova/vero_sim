@@ -144,7 +144,7 @@ void CanExtractor::initPublishers(RosCanMsgStruct& can_msg, ros::NodeHandle& nh)
 {
   ros::NodeHandle nh_msg(nh, can_msg.msg_name);
 
-  can_msg.message_pub = nh.advertise<dataspeed_can_msgs::CanMessageStamped>(can_msg.msg_name, 1);
+  can_msg.message_pub = nh.advertise<can_msgs::Frame>(can_msg.msg_name, 1);
 
   for (size_t i=0; i<can_msg.sigs.size(); i++){
     registerCanSignalPublisher(can_msg.sigs[i], nh_msg);
@@ -207,13 +207,13 @@ void CanExtractor::registerCanSignalPublisher(RosCanSigStruct& can_sig, ros::Nod
   }
 }
 
-void CanExtractor::pubMessage(const dataspeed_can_msgs::CanMessageStamped& msg)
+void CanExtractor::pubMessage(const can_msgs::Frame& msg)
 {
-  if (msgs_.find(msg.msg.id) == msgs_.end()){
+  if (msgs_.find(msg.id) == msgs_.end()){
     return;
   }
 
-  RosCanMsgStruct active_msg = msgs_[msg.msg.id];
+  RosCanMsgStruct active_msg = msgs_[msg.id];
 
   if (bag_open_){
     bag_.write(active_msg.msg_name, msg.header.stamp, msg);
@@ -221,7 +221,7 @@ void CanExtractor::pubMessage(const dataspeed_can_msgs::CanMessageStamped& msg)
     active_msg.message_pub.publish(msg);
   }
 
-  uint64_t raw_data = *((uint64_t*)&msg.msg.data[0]);
+  uint64_t raw_data = *((uint64_t*)&msg.data[0]);
 
   for (size_t i = 0; i < active_msg.sigs.size(); i++) {
 

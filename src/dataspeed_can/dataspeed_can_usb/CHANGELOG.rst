@@ -2,6 +2,12 @@
 Changelog for package dataspeed_can_usb
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.0.6 (2017-09-07)
+------------------
+* Only warn about dropped messages when the drop count changes
+* Migrated from dataspeed_can_msgs to can_msgs (this will break dependent packages)
+* Contributors: Kevin Hallenbeck
+
 1.0.5 (2017-08-21)
 ------------------
 * Prioritize the local include folder (there were issues with catkin workspace overlays)

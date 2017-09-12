@@ -4,7 +4,7 @@ project(dataspeed_can_usb)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   nodelet
-  dataspeed_can_msgs
+  can_msgs
   lusb
 )
 
@@ -23,7 +23,6 @@ add_library(${PROJECT_NAME}
   src/CanUsb.cpp
   src/CanDriver.cpp
 )
-add_dependencies(${PROJECT_NAME} dataspeed_can_msgs_gencpp)
 target_link_libraries(${PROJECT_NAME}
   ${catkin_LIBRARIES}
 )

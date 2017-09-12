@@ -2,6 +2,11 @@
 Changelog for package dbw_mkz_can
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.0.8 (2017-09-07)
+------------------
+* Migrated from dataspeed_can_msgs to can_msgs
+* Contributors: Kevin Hallenbeck
+
 1.0.7 (2017-08-21)
 ------------------
 * Removed steering report driver activity bit

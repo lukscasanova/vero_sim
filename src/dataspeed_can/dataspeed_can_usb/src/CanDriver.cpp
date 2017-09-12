@@ -61,7 +61,7 @@ static bool getParamHex(const ros::NodeHandle &nh, const std::string& key, int& 
   return false;
 }
 
-CanDriver::CanDriver(ros::NodeHandle &nh, ros::NodeHandle &nh_priv, lusb::UsbDevice *dev, const std::string &name) : nh_(nh), name_(name)
+CanDriver::CanDriver(ros::NodeHandle &nh, ros::NodeHandle &nh_priv, lusb::UsbDevice *dev, const std::string &name) : nh_(nh), name_(name), total_drops_(0)
 {
   dev_ = new CanUsb(dev);
   dev_->setRecvCallback(boost::bind(&CanDriver::recvDevice, this, _1, _2, _3, _4, _5));
@@ -114,21 +114,21 @@ CanDriver::~CanDriver()
   }
 }
 
-void CanDriver::recvRos(const dataspeed_can_msgs::CanMessage::ConstPtr& msg, unsigned int channel)
+void CanDriver::recvRos(const can_msgs::Frame::ConstPtr& msg, unsigned int channel)
 {
-  dev_->sendMessage(channel, msg->id, msg->extended, msg->dlc, msg->data.elems);
+  dev_->sendMessage(channel, msg->id, msg->is_extended, msg->dlc, msg->data.elems);
 }
 
 void CanDriver::recvDevice(unsigned int channel, uint32_t id, bool extended, uint8_t dlc, const uint8_t data[8])
 {
   boost::lock_guard<boost::mutex> lock(mutex_);
   if (channel < pubs_.size()) {
-    dataspeed_can_msgs::CanMessageStamped msg;
+    can_msgs::Frame msg;
     msg.header.stamp = ros::Time::now();
-    msg.msg.id = id;
-    msg.msg.extended = extended;
-    msg.msg.dlc = dlc;
-    memcpy(msg.msg.data.elems, data, 8);
+    msg.id = id;
+    msg.is_extended = extended;
+    msg.dlc = dlc;
+    memcpy(msg.data.elems, data, 8);
     pubs_[channel].publish(msg);
   }
 }
@@ -196,8 +196,8 @@ void CanDriver::serviceDevice()
                 std::stringstream ns;
                 ns << "can_bus_" << (i + 1);
                 ros::NodeHandle node(nh_, ns.str());
-                subs_.push_back(node.subscribe<dataspeed_can_msgs::CanMessage>("can_tx", 100, boost::bind(&CanDriver::recvRos, this, _1, i)));
-                pubs_.push_back(node.advertise<dataspeed_can_msgs::CanMessageStamped>("can_rx", 100, false));
+                subs_.push_back(node.subscribe<can_msgs::Frame>("can_tx", 100, boost::bind(&CanDriver::recvRos, this, _1, i)));
+                pubs_.push_back(node.advertise<can_msgs::Frame>("can_rx", 100, false));
               } else {
                 subs_.push_back(ros::Subscriber());
                 pubs_.push_back(ros::Publisher());
@@ -234,7 +234,8 @@ void CanDriver::serviceDevice()
         total += rx_drops[i];
         total += tx_drops[i];
       }
-      if (total) {
+      if (total != total_drops_) {
+        total_drops_ = total;
         std::stringstream ss;
         for (unsigned int i = 0; i < size; i++) {
           ss << "Rx" << (i + 1) << ": " << rx_drops[i] << ", ";
