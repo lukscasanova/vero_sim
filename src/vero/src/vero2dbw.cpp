@@ -16,7 +16,7 @@ void vero_cmd_callback(ransac_project::CarCommand cmd){
 
 	// // Steering Angle
 	// dbw_mkz_msgs::SteeringCmd steer_msg;
-	// steer_msg.steering_wheel_angle_cmd = steer_angle*20.0; //numero mistico
+	// steer_msg.steering_wheel_angle_cmd = steer_angle*14.0; //numero mistico
 	// steer_msg.enable = true;
 	// dbw_steer_pub.publish(steer_msg);
 
@@ -25,12 +25,10 @@ void vero_cmd_callback(ransac_project::CarCommand cmd){
 	// throttle_msg.pedal_cmd = 0.01*(speed_left+speed_right)/2.0;
 	// throttle_msg.enable = true;
 	// dbw_throttle_pub.publish(throttle_msg);
-	// 
-	// 
 	geometry_msgs::Twist cmd_vel;
 
 	cmd_vel.linear.x = (speed_left+speed_right)/2.0;
-	cmd_vel.angular.z = steer_angle;
+	cmd_vel.angular.z = tan(steer_angle)*cmd_vel.linear.x/2.8498; // L = 2.8498
 
 	cmd_vel_pub.publish(cmd_vel);
 
