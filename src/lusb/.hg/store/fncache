@@ -1,8 +1,0 @@
-data/src/UsbDevice.cpp.i
-data/package.xml.i
-data/.hgtags.i
-data/.hgignore.i
-data/CHANGELOG.rst.i
-data/LICENSE.i
-data/include/lusb/UsbDevice.h.i
-data/CMakeLists.txt.i

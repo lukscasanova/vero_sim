@@ -1,15 +1,12 @@
 - hg:
     local-name: dataspeed_can
-    uri: https://bitbucket.org/DataspeedInc/dataspeed_can
+    uri: https://randersonLemos@bitbucket.org/DataspeedInc/dataspeed_can
     version: default
 - hg:
     local-name: dbw_mkz_ros
-    uri: https://bitbucket.org/DataspeedInc/dbw_mkz_ros
-    version: default
-- hg:
-    local-name: lusb
-    uri: https://bitbucket.org/DataspeedInc/lusb
+    uri: https://randersonLemos@bitbucket.org/DataspeedInc/dbw_mkz_ros
     version: default
 - git:
     local-name: ransac_project
     uri: git@gitlab.com:randersonLemos/ransac_project.git
+    version: integration
