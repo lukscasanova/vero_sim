@@ -1,0 +1,18 @@
+digraph G {
+"mkz/base_footprint" -> "mkz/base_link"[label="Broadcaster: /mkz/state_publisher\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 427.832 sec old)\nBuffer length: 0.000 sec\n"];
+"world" -> "mkz/base_footprint"[label="Broadcaster: /gazebo\nAverage rate: 1000.201 Hz\nMost recent transform: 427.831 ( 0.001 sec old)\nBuffer length: 4.982 sec\n"];
+"mkz/base_footprint" -> "mkz/front_camera_optical"[label="Broadcaster: /mkz/state_publisher\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 427.832 sec old)\nBuffer length: 0.000 sec\n"];
+"mkz/front_camera_optical" -> "mkz/front_camera"[label="Broadcaster: /mkz/state_publisher\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 427.832 sec old)\nBuffer length: 0.000 sec\n"];
+"mkz/base_footprint" -> "mkz/hokuyo_link"[label="Broadcaster: /mkz/state_publisher\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 427.832 sec old)\nBuffer length: 0.000 sec\n"];
+"mkz/base_footprint" -> "mkz/perfect_gps"[label="Broadcaster: /mkz/state_publisher\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 427.832 sec old)\nBuffer length: 0.000 sec\n"];
+"mkz/base_link" -> "mkz/steer_fl"[label="Broadcaster: /mkz/state_publisher\nAverage rate: 47.984 Hz\nMost recent transform: 427.815 ( 0.017 sec old)\nBuffer length: 4.960 sec\n"];
+"mkz/base_link" -> "mkz/steer_fr"[label="Broadcaster: /mkz/state_publisher\nAverage rate: 47.984 Hz\nMost recent transform: 427.815 ( 0.017 sec old)\nBuffer length: 4.960 sec\n"];
+"mkz/steer_fl" -> "mkz/wheel_fl"[label="Broadcaster: /mkz/state_publisher\nAverage rate: 47.984 Hz\nMost recent transform: 427.815 ( 0.017 sec old)\nBuffer length: 4.960 sec\n"];
+"mkz/steer_fr" -> "mkz/wheel_fr"[label="Broadcaster: /mkz/state_publisher\nAverage rate: 47.984 Hz\nMost recent transform: 427.815 ( 0.017 sec old)\nBuffer length: 4.960 sec\n"];
+"mkz/base_link" -> "mkz/wheel_rl"[label="Broadcaster: /mkz/state_publisher\nAverage rate: 47.984 Hz\nMost recent transform: 427.815 ( 0.017 sec old)\nBuffer length: 4.960 sec\n"];
+"mkz/base_link" -> "mkz/wheel_rr"[label="Broadcaster: /mkz/state_publisher\nAverage rate: 47.984 Hz\nMost recent transform: 427.815 ( 0.017 sec old)\nBuffer length: 4.960 sec\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 427.832"[ shape=plaintext ] ;
+ }->"world";
+}

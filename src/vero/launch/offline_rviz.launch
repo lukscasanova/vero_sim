@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- RViz -->
+  <include file="$(find dbw_mkz_can)/launch/dbw.launch" >
+    <arg name="live" value="false" />
+    <arg name="load_urdf" value="true" />
+    <arg name="can_ns" value="can_bus_dbw" />
+    <arg name="vehicle_ns" value="mkz" />
+  </include>
+
+  <group ns="mkz">
+  	<node pkg="tf" type="static_transform_publisher" name="wheel_rr" args="0 0.7874 0 -3.141593 0 1.570796 mkz/base_link mkz/wheel_rr 10" />
+  	<node pkg="tf" type="static_transform_publisher" name="wheel_rl" args="0 -0.7874 0 -3.141593 0 1.570796 mkz/base_link mkz/wheel_rl 10" />
+  	<!-- <node pkg="tf" type="static_transform_publisher" name="steer_fr" args="2.85 0.79121 0 1.57 0 0 mkz/base_link mkz/steer_fr 10" />
+  	<node pkg="tf" type="static_transform_publisher" name="steer_fl" args="2.85 -0.79121 0 1.57 0 0 mkz/base_link mkz/steer_fl 10" /> -->
+  	<node pkg="tf" type="static_transform_publisher" name="wheel_fr" args="0 0 0 -3.141593 0 1.570796 mkz/steer_fr mkz/wheel_fr 10" />
+  	<node pkg="tf" type="static_transform_publisher" name="wheel_fl" args="0 0 0 -3.141593 0 1.570796 mkz/steer_fl mkz/wheel_fl 10" />
+
+  </group>
+
+  <!-- <node pkg="vero" type="log2viz" name="log2viz" />  -->
+  
+  <node pkg="rviz" type="rviz" name="rviz_vero" launch-prefix="nice" respawn="false" output="screen" args="-d $(find vero)/launch/rviz.rviz" />
+
+</launch>
