@@ -23,6 +23,6 @@
 
   <!-- <node pkg="vero" type="log2viz" name="log2viz" />  -->
   
-  <node pkg="rviz" type="rviz" name="rviz_vero" launch-prefix="nice" respawn="false" output="screen" args="-d $(find vero)/launch/rafael.rviz" />
+  <node pkg="rviz" type="rviz" name="rviz_vero" launch-prefix="nice" respawn="false" output="screen" args="-d $(find vero_sim)/launch/rafael.rviz" />
 
 </launch>

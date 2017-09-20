@@ -5,7 +5,7 @@
   <arg name="use_camera_control" default="true" />
   <arg name="world_name" default="$(find dbw_mkz_gazebo)/worlds/empty_world.world" />
   <arg name="sim_param_file" default="$(find dbw_mkz_gazebo)/yaml/default_sim_params.yaml" />
-  <arg name="urdf_file" default="$(find vero)/urdf/mkz.urdf.xacro" />
+  <arg name="urdf_file" default="$(find vero_sim)/urdf/mkz.urdf.xacro" />
 
   <include file="$(find dbw_mkz_gazebo)/launch/gazebo_world.launch" >
     <arg name="world_name" value="$(arg world_name)" />
