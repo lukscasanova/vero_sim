@@ -1,0 +1,11 @@
+ <launch>
+
+  <arg name="world_xacro" default="$(find vero)/objects/obstacles.urdf.xacro"/>
+
+  <include file="$(find vero)/launch/vero_sim.launch"/>
+
+  <param command="$(find xacro)/xacro.py $(arg world_xacro)" name="orchard" />
+
+  <node args="-urdf -param orchard -model orchard" name="spawn_obstacles" output="screen" pkg="gazebo_ros" respawn="false" type="spawn_model" />
+     
+</launch>

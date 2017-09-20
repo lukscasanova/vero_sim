@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<robot name="cylinder_tree" xmlns:xacro="http://www.ros.org/wiki/xacro">
+ <!--  <xacro:include filename="$(find turtlebot_description)/urdf/turtlebot_gazebo.urdf.xacro"/>
+  <xacro:include filename="$(find turtlebot_description)/urdf/turtlebot_properties.urdf.xacro"/>
+ -->
+  <!-- cylinder -->
+  <xacro:macro name="cylinder_tree" params="name parent_link x y ">
+    <joint name="${name}" type="fixed">
+      <origin xyz="${x} ${y} 0.0" rpy="0.0 0.0 0.0" />
+      <parent link="${parent_link}" />
+      <child link="${name}_link" />
+    </joint>
+
+    <link name="${name}_link">
+      <visual>
+        <geometry>
+          <cylinder radius="0.1" length="1.0" />
+        </geometry>
+        <material name="Green" />
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.1" length="1.0" />
+        </geometry>
+      </collision>
+    </link>
+
+    <gazebo>
+      <static>true</static>
+    </gazebo>
+  </xacro:macro>
+</robot>

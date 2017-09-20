@@ -2,7 +2,7 @@
 
 <launch>
 
-  <arg name="world_file" default="$(find vero)/worlds/circle3.world"/>
+  <arg name="world_file" default="$(find dbw_mkz_gazebo)/worlds/empty_world.world"/>
   <arg name="use_joy" default="false" />
   
   <include file="$(find dbw_mkz_gazebo)/launch/dbw_mkz_gazebo.launch" >
