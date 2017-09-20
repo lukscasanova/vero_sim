@@ -34,7 +34,7 @@ roslaunch vero_sim vero_ransac_test.launch
 ## Custom Obstacles Worlds
 
 We can create a custom obstacle track for the car composed of cylinders by following the example on this file:
-(obstacle.urdf.xacro)[src/vero_sim/objects/obstacles.urdf.xacro]
+[obstacle.urdf.xacro](src/vero_sim/objects/obstacles.urdf.xacro)
 
 Create a copy of that file and modify it, then launch:
 
