@@ -1,14 +1,6 @@
 <?xml version="1.0"?>
 <launch>
 
-  <!-- RViz -->
-  <include file="$(find dbw_mkz_can)/launch/dbw.launch" >
-    <arg name="live" value="false" />
-    <arg name="load_urdf" value="true" />
-    <arg name="can_ns" value="can_bus_dbw" />
-    <arg name="vehicle_ns" value="mkz" />
-  </include>
-
   <node pkg="rviz" type="rviz" name="rviz_vero" launch-prefix="nice" respawn="false" output="screen" args="-d $(find vero)/launch/rviz.rviz" />
 
 </launch>
