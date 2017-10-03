@@ -1,11 +1,13 @@
 <launch>
-	<include file="$(find vero_sim)/launch/vero_sim.launch"/>
+	<include file="$(find vero_sim)/launch/vero_sim.launch">
+		<arg name="world_file" value="$(find road_generation_gazebo)/worlds/custom.world"/>
+	</include>
 
 <!-- 	<include file="$(find ransac_project)/launch/nodeRansac.launch"/>
  -->
 	<!-- <include file="$(find ransac_project)/launch/nodeControl.launch"/> -->
 
-	<node pkg="vero" type="vero2dbw" name="vero2dbw_node" output="screen"/>
+	<node pkg="vero_sim" type="vero2dbw" name="vero2dbw_node" output="screen"/>
 
 	<include file="$(find vero_sim)/launch/rviz.launch"/>
 

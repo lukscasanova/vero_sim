@@ -3,13 +3,14 @@
 <launch>
 
   <arg name="world_file" default="$(find dbw_mkz_gazebo)/worlds/empty_world.world"/>
+  <!-- <arg name="world_file" default="$(find road_generation_gazebo)/worlds/custom.world"/> -->
   <arg name="use_joy" default="false" />
   
   <include file="$(find dbw_mkz_gazebo)/launch/dbw_mkz_gazebo.launch" >
     <arg name="use_camera_control" value="false" />
     <arg name="world_name" value="$(arg world_file)" />
-    <arg name="sim_param_file" value="$(find vero)/yaml/vero.yaml" />
-    <arg name="urdf_file" value="$(find vero)/urdf/vero.urdf.xacro" />
+    <arg name="sim_param_file" value="$(find vero_sim)/yaml/vero.yaml" />
+    <arg name="urdf_file" value="$(find vero_sim)/urdf/vero.urdf.xacro" />
   </include>
 
   <!-- Joystick demo -->
