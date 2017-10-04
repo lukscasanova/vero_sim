@@ -4,3 +4,4 @@ install/*
 src/ransac_project
 src/dataspeed_can
 src/dbw_mkz_ros
+src/road_generation_gazebo
