@@ -1,6 +1,6 @@
 <launch>
 	<include file="$(find vero_sim)/launch/vero_sim.launch">
-		<arg name="world_file" value="$(find road_generation_gazebo)/worlds/custom.world"/>
+		<arg name="world_file" value="$(find road_generation_gazebo)/world/custom.world"/>
 	</include>
 
 <!-- 	<include file="$(find ransac_project)/launch/nodeRansac.launch"/>

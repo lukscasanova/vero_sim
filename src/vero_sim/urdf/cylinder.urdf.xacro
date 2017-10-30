@@ -14,13 +14,18 @@
     <link name="${name}_link">
       <visual>
         <geometry>
-          <cylinder radius="0.1" length="1.0" />
-        </geometry>
+          <cylinder>
+            <radius>0.2</radius>
+            <length>2.0</length>
+          </cylinder>        </geometry>
         <material name="Green" />
       </visual>
       <collision>
         <geometry>
-          <cylinder radius="0.1" length="1.0" />
+          <cylinder>
+            <radius>0.2</radius>
+            <length>2.0</length>
+          </cylinder>
         </geometry>
       </collision>
     </link>

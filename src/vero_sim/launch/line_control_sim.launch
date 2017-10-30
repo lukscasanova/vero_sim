@@ -9,14 +9,15 @@
 
 
   <node pkg = "ransac_project" type = "nodeControl" name = "nodeControl" output="screen" clear_params="true">
-    <param name = "KPT" value = "2.0" />
-    <param name = "KIT" value = "0.0" />
+    <param name = "KPT" value = "5.0" />
+    <param name = "KIT" value = "0.005" />
     <param name = "KRT" value = "1.0" />
-    <param name = "KVT" value = "-100.0" />
+    <param name = "KVT" value = "15.0" />
     <param name = "length" value = "4.0" />
     <param name = "rampTime" value = "5.0" />
     <!--param name = "platform" value = 'pioneer' /-->
     <param name = "platform" value = 'vero' />
-    <param name = "maxLinearVel" value = "10" />
+    <!-- <param name = "maxLinearVel" value = "2.3" /> -->
+    <param name = "maxLinearVel" value = "5.0" />
   </node>
 </launch>
