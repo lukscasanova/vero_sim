@@ -5,6 +5,7 @@
 
 #include <nav_msgs/Odometry.h>
 #include <geometry_msgs/PoseWithCovarianceStamped.h>
+#include <geometry_msgs/WrenchStamped.h>
 
 tf::TransformListener* listener_ptr;
 
@@ -49,13 +50,15 @@ int main(int argc, char **argv){
     ros::NodeHandle nh;
     ros::NodeHandle nhPrivate("~");
 
-    std::string log_file_path="/home/lucas/Desktop/droni.txt";
+    std::string log_file_path="/home/lucas/Desktop/3_teste.txt";
 
 	std::ifstream logFile;
 	logFile.open(log_file_path.c_str());
 
 	ros::Publisher odom_pub = nh.advertise<nav_msgs::Odometry>("odom", 10);
 	ros::Publisher point_pub = nh.advertise<geometry_msgs::PoseWithCovarianceStamped>("setpoint", 10);
+	ros::Publisher force_pub = nh.advertise<geometry_msgs::WrenchStamped>("force", 10);
+	ros::Publisher wind_pub = nh.advertise<geometry_msgs::WrenchStamped>("wind", 10);
 	// ros::Publisher fl_pub = nh.advertise<nav_msgs::Odometry>("odom_fl", 10);
 	// ros::Publisher fr_pub = nh.advertise<nav_msgs::Odometry>("odom_fr", 10);
 	// ros::Publisher rl_pub = nh.advertise<nav_msgs::Odometry>("odom_rl", 10);
@@ -81,37 +84,67 @@ int main(int argc, char **argv){
 		0.0,0.0,0.0,0.0,0.0,100000.0
 	};
 
+	geometry_msgs::WrenchStamped force, wind;
+
+	force.wrench.torque.x = 0.0;
+	force.wrench.torque.y = 0.0;
+	force.wrench.torque.z = 0.0;
+
+	wind.wrench.torque.x = 0.0;
+	wind.wrench.torque.y = 0.0;
+	wind.wrench.torque.z = 0.0;
+
 
 	// double time;
 	float x, y, z, row, pitch, yaw, wheel_l, wheel_r;
+	float fx, fy, fz;
+	float last_fx=0, last_fy=0, last_fz=0;
+	float last_mx=0, last_my=0, last_mz=0;
+	float mx, my, mz;
+
+	float wind_intensity, wind_yaw;
 	static tf::TransformBroadcaster br;
 	tf::TransformListener listener;
 	listener_ptr = &listener;
 	tf::Transform transform;
-	tf::Transform steer_right, steer_left;
-	steer_left.setOrigin(tf::Vector3(2.85, -0.79121, 0));
-	steer_right.setOrigin(tf::Vector3(2.85, 0.79121, 0));
+	// tf::Transform steer_right, steer_left;
+	// steer_left.setOrigin(tf::Vector3(2.85, -0.79121, 0));
+	// steer_right.setOrigin(tf::Vector3(2.85, 0.79121, 0));
 
 	nav_msgs::Odometry odom_msg;
 
 	ros::Time start_time = ros::Time::now();
 
 
-	ros::Rate r(10.0);
+	ros::Rate r(20.0);
 
 	while(ros::ok() && logFile.good()){
 
-	 	logFile >> x >> y >> z >> row >> pitch >> yaw;
+	 	logFile >> x >> y >> z >>
+	 	 row >> pitch >> yaw >>
+	 	 fx >> fy >> fz >> 
+	 	 mx >> my >> mz >>
+	 	 wind_intensity >> wind_yaw;
 
 	 	ROS_INFO("%f, %f, %f, %f, %f, %f", x, y, z, row, pitch, yaw );
-
 
 	 	y=-y;
 	 	z=-z;
 	 	pitch = -pitch;
 	 	yaw = -yaw;
-	 	// wheel_l = -wheel_l;
-	 	// wheel_r = -wheel_r;
+	 	fy = -fy;
+	 	fz = -fz;
+	 	my = -my;
+	 	mz = -mz;
+
+	 	fx = fx*0.01 + last_fx*0.99;
+	 	fy = fy*0.01 + last_fy*0.99;
+	 	fz = fz*0.01 + last_fz*0.99;
+
+	 	mx = mx*0.1 + last_mx*0.9;
+	 	my = my*0.1 + last_my*0.9;
+	 	mz = mz*0.1 + last_mz*0.9;
+
 		ros::Time timestamp = ros::Time::now();
 
 		transform.setOrigin( tf::Vector3(x, y, z) );
@@ -135,10 +168,31 @@ int main(int argc, char **argv){
 
 		odom_pub.publish(odom_msg);
 
+		/*** SETPOINT PUBLISHING ***/
 		setpoint.header.stamp = timestamp;
 		setpoint.header.frame_id = "world";
 		point_pub.publish(setpoint);
-		// q.setRPY(0, 0, wheel_l);
+
+		/*** FORCE PUBLISHING ***/
+		force.header.stamp = timestamp;
+		force.header.frame_id = "base_link";
+		force.wrench.force.x = fx;
+		force.wrench.force.y = fy;
+		force.wrench.force.z = fz;
+
+		force_pub.publish(force);		// q.setRPY(0, 0, wheel_l);
+
+		tf::Vector3 wind_vec(-wind_intensity*cos(wind_yaw), wind_intensity*sin(wind_yaw), 0.0);
+
+		wind_vec = transform.inverse()*wind_vec - transform.inverse()*tf::Vector3(0.0, 0.0, 0.0);
+		/*** WIND PUBLISHING ***/
+		wind.header.stamp = timestamp;
+		wind.header.frame_id = "base_link";
+		wind.wrench.force.x = wind_vec.getX();
+		wind.wrench.force.y = wind_vec.getY();
+		wind.wrench.force.z = wind_vec.getZ();
+
+		wind_pub.publish(wind);
 		// steer_left.setRotation(q);
 
 		// q.setRPY(0, 0, wheel_r);
@@ -160,6 +214,10 @@ int main(int argc, char **argv){
 		// fr_pub.publish(odom_msg);
 
 		// ROS_INFO("%f, %f, %f, %f, %f, %f", x, y, z, row, pitch, yaw );
+		// 
+		last_fx = fx;
+	 	last_fy = fy;
+	 	last_fz = fz;
 		r.sleep();
 	}
 	ROS_INFO_STREAM("end");
