@@ -11,37 +11,33 @@ tf::TransformListener* listener_ptr;
 
 void toOdometryMessage(std::string parent, std::string child, nav_msgs::Odometry& odom, ros::Time timestamp){
 
- 	tf::StampedTransform transform;
+    tf::StampedTransform transform;
+
     try{
-      listener_ptr->lookupTransform(parent, child, ros::Time(0), transform);
+    	listener_ptr->lookupTransform(parent, child, ros::Time(0), transform);
     }
     catch (tf::TransformException ex){
-      ROS_ERROR("%s",ex.what());
-      return;
-      // ros::Duration(1.0).sleep();
+    	ROS_ERROR("%s",ex.what());
+    	return;
+    	// ros::Duration(1.0).sleep();
     }
 
     odom.header.stamp = timestamp;
-	odom.header.frame_id = parent;
-	odom.child_frame_id = child;
+    odom.header.frame_id = parent;
+    odom.child_frame_id = child;
 
-	tf::Vector3 origin = transform.getOrigin();
-	tf::Quaternion q = transform.getRotation();
+    tf::Vector3 origin = transform.getOrigin();
+    tf::Quaternion q = transform.getRotation();
 
-	odom.pose.pose.position.x = origin.x();
-	odom.pose.pose.position.y = origin.y();
-	odom.pose.pose.position.z = origin.z();
+    odom.pose.pose.position.x = origin.x();
+    odom.pose.pose.position.y = origin.y();
+    odom.pose.pose.position.z = origin.z();
 
-	odom.pose.pose.orientation.x = q.x();
-	odom.pose.pose.orientation.y = q.y();
-	odom.pose.pose.orientation.z = q.z();
-	odom.pose.pose.orientation.w = q.w();
-
-
+    odom.pose.pose.orientation.x = q.x();
+    odom.pose.pose.orientation.y = q.y();
+    odom.pose.pose.orientation.z = q.z();
+    odom.pose.pose.orientation.w = q.w();
 }
-
-
-
 
 int main(int argc, char **argv){
 

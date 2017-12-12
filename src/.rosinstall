@@ -10,3 +10,7 @@
     local-name: ransac_project
     uri: git@gitlab.com:randersonLemos/ransac_project.git
     version: integration
+- git:
+    local-name: road_generation_gazebo 
+    uri: https://github.com/randersonLemos/road_generation_gazebo.git
+    version: ros 

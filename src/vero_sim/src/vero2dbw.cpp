@@ -5,7 +5,6 @@
 #include <dbw_mkz_msgs/SteeringCmd.h>
 #include <geometry_msgs/Twist.h>
 
-
 ros::Publisher dbw_throttle_pub, dbw_brake_pub, dbw_steer_pub;
 ros::Publisher cmd_vel_pub;
 
@@ -31,7 +30,6 @@ void vero_cmd_callback(ransac_project::CarCommand cmd){
 	cmd_vel.angular.z = tan(steer_angle)*cmd_vel.linear.x/2.8498; // L = 2.8498
 
 	cmd_vel_pub.publish(cmd_vel);
-
 }
 
 int main(int argc, char **argv){
@@ -44,16 +42,12 @@ int main(int argc, char **argv){
     std::string brake_cmd_topic = "/mkz/brake_cmd";
     std::string steer_cmd_topic = "/mkz/steering_cmd";
     std::string cmd_vel_topic = "/mkz/cmd_vel";
-    
-    //Subscribe to Vero command
-    ros::Subscriber vero_cmd_sub = nh.subscribe(vero_cmd_topic, 1, &vero_cmd_callback);
 
     // Publish to DBW commands
     dbw_throttle_pub = nh.advertise<dbw_mkz_msgs::ThrottleCmd>(throttle_cmd_topic, 1);
     dbw_brake_pub = nh.advertise<dbw_mkz_msgs::BrakeCmd>(brake_cmd_topic, 1);
     dbw_steer_pub = nh.advertise<dbw_mkz_msgs::SteeringCmd>(steer_cmd_topic, 1);
     cmd_vel_pub = nh.advertise<geometry_msgs::Twist>(cmd_vel_topic, 1);
-
 
     ros::spin();
 }
