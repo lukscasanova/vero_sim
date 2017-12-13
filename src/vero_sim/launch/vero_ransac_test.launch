@@ -1,9 +1,12 @@
 <?xml version="1.0"?>
 <launch>
+
   <arg name="world_file" default="$(find road_generation_gazebo)/worlds/custom.world"/>
+  <arg name ="headless" default="true" />
 
 	<include file="$(find vero_sim)/launch/vero_sim.launch">
 		<arg name="world_file" value="$(arg world_file)"/>
+    <arg name="headless" value="$(arg headless)"/>
 	</include>
 
   <!--<include file="$(find ransac_project)/launch/nodeRansac.launch"/>-->
@@ -14,4 +17,5 @@
   <include file="$(find vero_sim)/launch/rviz.launch"/>
 
 	<!-- <node pkg="rosbag" type="record" name="rosbag_record" args="-a -o /home/$(env USER)/Desktop/vero" /> -->
+
 </launch>

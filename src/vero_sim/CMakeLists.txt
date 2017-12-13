@@ -7,7 +7,7 @@ project(vero_sim)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED roscpp dbw_mkz_msgs ransac_project)
+find_package(catkin REQUIRED roscpp dbw_mkz_msgs ransac_corridor_control)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
