@@ -9,10 +9,13 @@
     <arg name="headless" value="$(arg headless)"/>
 	</include>
 
-  <!--<include file="$(find ransac_project)/launch/nodeRansac.launch"/>-->
-  <!--<include file="$(find ransac_project)/launch/nodeControl.launch"/>-->
 
-	<!--<node pkg="vero_sim" type="vero2dbw" name="vero2dbw_node" output="screen"/>-->
+  <remap from="/ransac/scan" to="/mkz/scan" />
+  <rosparam file="$(find vero_sim)/yaml/ransac.yaml" ns="ransac"/>
+  <node pkg="ransac_corridor_control" type="bisector_node" name="bisector_node" output="screen" ns="ransac" />
+  <node pkg="ransac_corridor_control" type="control_node" name="control_node" output="screen" ns="ransac" />
+
+  <node pkg="vero_sim" type="vero2dbw" name="vero2dbw_node" output="screen"/>
 
   <include file="$(find vero_sim)/launch/rviz.launch"/>
 

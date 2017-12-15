@@ -37,7 +37,7 @@ int main(int argc, char **argv){
     ros::NodeHandle nh;
     ros::NodeHandle nhPrivate("~");
 
-    std::string vero_cmd_topic = "/verocarfreedom/car_command";
+    std::string vero_cmd_topic = "/ransac/car_command";
     std::string throttle_cmd_topic = "/mkz/throttle_cmd";
     std::string brake_cmd_topic = "/mkz/brake_cmd";
     std::string steer_cmd_topic = "/mkz/steering_cmd";
@@ -48,6 +48,8 @@ int main(int argc, char **argv){
     dbw_brake_pub = nh.advertise<dbw_mkz_msgs::BrakeCmd>(brake_cmd_topic, 1);
     dbw_steer_pub = nh.advertise<dbw_mkz_msgs::SteeringCmd>(steer_cmd_topic, 1);
     cmd_vel_pub = nh.advertise<geometry_msgs::Twist>(cmd_vel_topic, 1);
+
+    ros::Subscriber car_command_sub = nh.subscribe(vero_cmd_topic, 1, vero_cmd_callback);
 
     ros::spin();
 }
