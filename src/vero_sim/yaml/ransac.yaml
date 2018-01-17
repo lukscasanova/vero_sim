@@ -5,14 +5,14 @@ laser:
   threshold: 2.5
 kalman:
   model_variance: 1
-  measure_variance: 50
+  measure_variance: 10
 control:
-  kpt: 2.0
-  kit: 0.1
+  kpt: 0.9
+  kit: 0.01
   krt: 1.0
-  kvt: 5.0
+  kvt: 1.5
   ramp_time: 5.0
-  max_lin_vel: 5.0
+  max_lin_vel: 2.5
 topics:
   lines_pcl: "lines_pcl"
   bisector_coeffs: "bisector_coeffs"
