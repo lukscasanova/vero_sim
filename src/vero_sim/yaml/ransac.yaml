@@ -11,10 +11,10 @@ kalman:
 control:
   kpt: 0.10
   kit: 0.001
-  kvt: 0.40
-  krt: 1.00
+  kvt: 0.80
+  krt: 0.50
   ramp_time: 2.0
-  max_lin_vel: 1.0
+  max_lin_vel: 3.0
 topics:
   lines_pcl: "lines_pcl"
   bisector_coeffs: "bisector_coeffs"
