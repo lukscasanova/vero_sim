@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <launch>
 
-  <arg name="world_file" default="$(find road_generation_gazebo)/worlds/custom.world"/>
+  <!--<arg name="world_file" default="$(find road_generation_gazebo)/worlds/custom.world"/>-->
+  <arg name="world_file" default="$(find dbw_mkz_gazebo)/worlds/empty_world.world"/>
   <arg name ="headless" default="true" />
 
 	<include file="$(find vero_sim)/launch/vero_sim.launch">
@@ -12,8 +13,9 @@
 
   <remap from="/ransac/scan" to="/mkz/scan" />
   <rosparam file="$(find vero_sim)/yaml/ransac.yaml" ns="ransac"/>
-  <node pkg="ransac_corridor_control" type="bisector_node" name="bisector_node" output="screen" ns="ransac" />
-  <node pkg="ransac_corridor_control" type="control_node" name="control_node" output="screen" ns="ransac" />
+  <node pkg="ransac_corridor_control" type="bisector_node" name="bisector" output="screen" ns="ransac"/>
+  <!--<node pkg="ransac_corridor_control" type="control_node" name="control" output="screen" ns="ransac"/>-->
+  <node pkg="ransac_corridor_control" type="filter.py" name="filter" output="screen" ns="ransac"/>
 
   <node pkg="vero_sim" type="vero2dbw" name="vero2dbw_node" output="screen"/>
 

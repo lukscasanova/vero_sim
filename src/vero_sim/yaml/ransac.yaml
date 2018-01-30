@@ -1,23 +1,24 @@
 laser:
   verbose: false
   window_width: 50.0
-  window_length: 20.0
+  window_length: 25.0
   threshold: 2.5
 kalman:
   model_variance_11: 1
   model_variance_22: 1
-  measure_variance_11: 1
-  measure_variance_22: 1
+  measure_variance_11: 10
+  measure_variance_22: 15
 control:
-  kpt: 0.20
+  kpt: 0.10
   kit: 0.001
   kvt: 0.40
   krt: 1.00
   ramp_time: 2.0
-  max_lin_vel: 3.0
+  max_lin_vel: 1.0
 topics:
   lines_pcl: "lines_pcl"
   bisector_coeffs: "bisector_coeffs"
+  filtered_bisector_coeffs: "filtered_bisector_coeffs"
   laser_scan: "scan"
   cmd_vel: "car_command"
 tfs:

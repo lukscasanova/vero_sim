@@ -9,7 +9,7 @@
 - git:
     local-name: ransac_corridor_control
     uri: https://github.com/randersonLemos/ransac_corridor_control.git
-    version: integration
+    version: lucas2
 - git:
     local-name: road_generation_gazebo
     uri: https://github.com/randersonLemos/road_generation_gazebo.git
