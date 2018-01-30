@@ -14,7 +14,7 @@ control:
   kvt: 0.80
   krt: 0.50
   ramp_time: 2.0
-  max_lin_vel: 3.0
+  max_lin_vel: 1.0
 topics:
   lines_pcl: "lines_pcl"
   bisector_coeffs: "bisector_coeffs"

@@ -1,0 +1,17 @@
+<launch>
+	<arg name="world_file" default="$(find road_generation_gazebo)/worlds/custom.world"/>
+  	<arg name ="headless" default="true" />
+
+	<include file="$(find vero_sim)/launch/vero_sim.launch">
+		<arg name="world_file" value="$(arg world_file)"/>
+    <arg name="headless" value="$(arg headless)"/>
+	</include>
+
+	
+  <node pkg="vero_sim" type="vero2dbw" name="vero2dbw_node" output="screen"/>
+
+  <include file="$(find vero_sim)/launch/rviz.launch"/>
+
+
+
+</launch>

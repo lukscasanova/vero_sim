@@ -1,0 +1,6 @@
+<launch>
+ <remap from="/ransac/scan" to="/mkz/scan" />
+  <rosparam file="$(find vero_sim)/yaml/ransac.yaml" ns="ransac"/>
+  <node pkg="ransac_corridor_control" type="bisector_node" name="bisector_node" output="screen" ns="ransac" />
+  <node pkg="ransac_corridor_control" type="control_node" name="control_node" output="screen" ns="ransac" />
+</launch>
