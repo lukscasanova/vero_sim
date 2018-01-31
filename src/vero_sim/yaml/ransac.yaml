@@ -1,20 +1,20 @@
 laser:
   verbose: false
-  window_width: 50.0
-  window_length: 25.0
-  threshold: 2.5
+  window_width: 10.0
+  window_length: 8.0
+  threshold: 3.5
 kalman:
   model_variance_11: 1
   model_variance_22: 1
   measure_variance_11: 10
   measure_variance_22: 15
 control:
-  kpt: 0.10
-  kit: 0.001
+  kpt: 0.2
+  kit: 0.003
   kvt: 0.80
   krt: 0.50
   ramp_time: 2.0
-  max_lin_vel: 1.0
+  max_lin_vel: 5.0
 topics:
   lines_pcl: "lines_pcl"
   bisector_coeffs: "bisector_coeffs"
