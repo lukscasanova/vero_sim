@@ -1,24 +1,33 @@
+l: 2.8498 # distance between car axle
 laser:
   verbose: false
-  window_width: 10.0
-  window_length: 8.0
+  window_width: 20.0
+  window_length: 60.0
   threshold: 3.5
-kalman:
-  model_variance_11: 1
-  model_variance_22: 1
-  measure_variance_11: 10
-  measure_variance_22: 15
 control:
-  kpt: 0.2
+  kpt: 0.1
   kit: 0.003
   kvt: 0.80
   krt: 0.50
   ramp_time: 2.0
-  max_lin_vel: 5.0
+  max_lin_vel: 1.0
+kalman:
+  # Elements of the process covariance matrix Q
+  q00: 1.0 # variance of the angle between the car x-axis reference frame and the bisector line
+           # i.e. the arctan(a), where a is the angular coefficient of the bisector line
+  q11: 1.0 # variance of the linear coefficient of the bisector line with respect the reference frame of the car
+  q22: 1.0 # variance of the car angular velocity
+  q33: 1.0 # variance of the car linear velocity
+  # Elements of the measurement covariance matrix R
+  r00: 0.001
+  r11: 0.001
+  r22: 1.0
+  r33: 1.0
 topics:
-  lines_pcl: "lines_pcl"
-  bisector_coeffs: "bisector_coeffs"
-  filtered_bisector_coeffs: "filtered_bisector_coeffs"
+  line_pcl: "bisector_pcl"
+  filtered_line_pcl: "filtered_bisector_pcl"
+  line_coeffs: "bisector_coeffs"
+  filtered_line_coeffs: "filtered_bisector_coeffs"
   laser_scan: "scan"
   cmd_vel: "car_command"
 tfs:
