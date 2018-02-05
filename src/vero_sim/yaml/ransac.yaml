@@ -6,12 +6,13 @@ laser:
   threshold: 3.5
 control:
   kpt: 0.1
-  kit: 0.003
-  kvt: 1.00
-  krt: 0.50
+  kit: 0.001
+  kvt: 0.50
+  krt: 0.20
   ramp_time: 2.0
   max_lin_vel: 1.5
 kalman:
+  verbose: false
   # Elements of the process covariance matrix Q
   q00: 1.0 # variance of the angle between the car x-axis reference frame and the bisector line
            # i.e. the arctan(a), where a is the angular coefficient of the bisector line
@@ -19,10 +20,10 @@ kalman:
   q22: 1.0 # variance of the car angular velocity
   q33: 1.0 # variance of the car linear velocity
   # Elements of the measurement covariance matrix R
-  r00: 10.0
-  r11: 10.0
+  r00: 50.0
+  r11: 75.0
   r22: 10.0
-  r33: 10.0
+  r33: 25.0
 topics:
   line_pcl: "bisector_pcl"
   filtered_line_pcl: "filtered_bisector_pcl"
