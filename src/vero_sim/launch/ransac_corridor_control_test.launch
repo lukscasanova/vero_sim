@@ -15,7 +15,7 @@
   <rosparam file="$(find vero_sim)/yaml/ransac.yaml" ns="ransac"/>
   <node pkg="ransac_corridor_control" type="bisector_node" name="bisector" output="screen" ns="ransac"/>
   <node pkg="ransac_corridor_control" type="control_node" name="control" output="screen" ns="ransac"/>
-  <node pkg="ransac_corridor_control" type="filter.py" name="filter" output="screen" ns="ransac"/>
+  <node pkg="ransac_corridor_control" type="filter_node.py" name="filter" output="screen" ns="ransac"/>
 
   <node pkg="vero_sim" type="vero2dbw" name="vero2dbw_node" output="screen"/>
 

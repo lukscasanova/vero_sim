@@ -8,7 +8,7 @@ control:
   kpt: 0.1
   kit: 0.001
   kvt: 0.50
-  krt: 0.20
+  krt: 0.50
   ramp_time: 2.0
   max_lin_vel: 1.5
 kalman:
@@ -29,6 +29,7 @@ topics:
   filtered_line_pcl: "filtered_bisector_pcl"
   line_coeffs: "bisector_coeffs"
   filtered_line_coeffs: "filtered_bisector_coeffs"
+  points_ransac: "points_ransac"
   laser_scan: "scan"
   cmd_vel: "car_command"
 tfs:
