@@ -1,5 +1,5 @@
 #include <ros/ros.h>
-#include <ransac_corridor_control/CarCommand.h>
+#include <ransac_corridor_control/CarCommandStamped.h>
 #include <dbw_mkz_msgs/ThrottleCmd.h>
 #include <dbw_mkz_msgs/BrakeCmd.h>
 #include <dbw_mkz_msgs/SteeringCmd.h>
@@ -8,7 +8,7 @@
 ros::Publisher dbw_throttle_pub, dbw_brake_pub, dbw_steer_pub;
 ros::Publisher cmd_vel_pub;
 
-void vero_cmd_callback(ransac_corridor_control::CarCommand cmd){
+void vero_cmd_callback(ransac_corridor_control::CarCommandStamped cmd){
 	double steer_angle = cmd.steerAngle;
 	double speed_left = cmd.speedLeft;
 	double speed_right = cmd.speedRight;

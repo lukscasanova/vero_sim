@@ -7,8 +7,8 @@
     <arg name="headless" value="$(arg headless)"/>
 	</include>
 
-	
-  <node pkg="vero_sim" type="vero2dbw" name="vero2dbw_node" output="screen"/>
+
+  <!--<node pkg="vero_sim" type="vero2dbw" name="vero2dbw_node" output="screen"/>-->
 
   <include file="$(find vero_sim)/launch/rviz.launch"/>
 
