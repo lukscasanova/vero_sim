@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="world_file" default="$(find road_generation_gazebo)/worlds/custom.world"/>
+  <!--<arg name="world_file" default="$(find dbw_mkz_gazebo)/worlds/empty_world.world"/>-->
+  <arg name ="headless" default="true" />
+
+	<include file="$(find vero_sim)/launch/vero_sim.launch">
+		<arg name="world_file" value="$(arg world_file)"/>
+    <arg name="headless" value="$(arg headless)"/>
+	</include>
+
+
+  <remap from="/ransac/scan" to="/mkz/scan" />
+  <rosparam file="$(find vero_sim)/yaml/ransac.yaml" ns="ransac"/>
+  <node pkg="ransac_corridor_control" type="bisector_node" name="bisector" output="screen" ns="ransac"/>
+  <node pkg="ransac_corridor_control" type="control_node" name="control" output="screen" ns="ransac"/>
+  <node pkg="ransac_corridor_control" type="filter_node.py" name="filter" output="screen" ns="ransac"/>
+  <node pkg="ransac_corridor_control" type="to_twist_node" name="to_twist" output="screen" ns="ransac"/>
+
+  <include file="$(find vero_sim)/launch/rviz.launch"/>
+
+	<!-- <node pkg="rosbag" type="record" name="rosbag_record" args="-a -o /home/$(env USER)/Desktop/vero" /> -->
+
+</launch>

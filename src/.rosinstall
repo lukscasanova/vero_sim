@@ -7,6 +7,10 @@
     uri: https://randersonLemos@bitbucket.org/DataspeedInc/dbw_mkz_ros
     version: default
 - git:
-    local-name: ransac_project
-    uri: git@gitlab.com:randersonLemos/ransac_project.git
-    version: integration
+    local-name: ransac_corridor_control
+    uri: https://github.com/randersonLemos/ransac_corridor_control.git
+    version: master
+- git:
+    local-name: road_generation_gazebo
+    uri: https://github.com/randersonLemos/road_generation_gazebo.git
+    version: master

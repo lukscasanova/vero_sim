@@ -2,15 +2,21 @@
 
 <launch>
 
+  <arg name="sim_param_file" default="$(find vero_sim)/yaml/single_vehicle.yaml" />
   <arg name="world_file" default="$(find dbw_mkz_gazebo)/worlds/empty_world.world"/>
-  <!-- <arg name="world_file" default="$(find road_generation_gazebo)/worlds/custom.world"/> -->
+  <!--<arg name="world_file" default="$(find road_generation_gazebo)/worlds/custom.world"/>-->
+  <!--<arg name="world_file" default="$(find road_generation_gazebo)/worlds/example.world"/>-->
   <arg name="use_joy" default="false" />
-  
-  <include file="$(find dbw_mkz_gazebo)/launch/dbw_mkz_gazebo.launch" >
-    <arg name="use_camera_control" value="false" />
+  <arg name ="headless" default="false" />
+  <arg name="use_camera_control" value="false" />
+  <arg name="urdf_file" value="$(find vero_sim)/urdf/vero.urdf.xacro" />
+
+  <include file="$(find vero_sim)/launch/dbw_mkz_gazebo_modified.launch" >
+    <arg name="use_camera_control" value="$(arg use_camera_control)" />
     <arg name="world_name" value="$(arg world_file)" />
-    <arg name="sim_param_file" value="$(find vero_sim)/yaml/vero.yaml" />
-    <arg name="urdf_file" value="$(find vero_sim)/urdf/vero.urdf.xacro" />
+    <arg name="sim_param_file" value="$(arg sim_param_file)" />
+    <arg name="urdf_file" value="$(arg urdf_file)" />
+    <arg name="headless" value="$(arg headless)"/>
   </include>
 
   <!-- Joystick demo -->
